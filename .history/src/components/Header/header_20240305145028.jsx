@@ -10,7 +10,9 @@ function Header() {
       <img className="header__logo" src={logo} />
       <p className="header__date-and-location">{currentDate}, LOCATION</p>
       <button className="header__add-clothes-btn">
-        + Add Clothes
+        <form action="" className="modal">
+          
+        </form>
       </button>
       <div className="header__user-container">
         <p className="header__username">NAME</p>

@@ -9,7 +9,6 @@ function App() {
     <div className='page'>
       <div className='page__content'>
         <Header />
-        <ModalWithForm />
       </div>
     </div>
   );
