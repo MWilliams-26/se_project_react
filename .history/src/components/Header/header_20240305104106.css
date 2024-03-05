@@ -1,0 +1,11 @@
+.header {
+  display: flex;
+}
+
+.header__add-clothes-btn {
+  margin-left: auto;
+}
+
+.header__user-container {
+  display: flex;
+}

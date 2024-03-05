@@ -1,0 +1,16 @@
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.header__add-clothes-btn {
+  margin-left: auto;
+}
+
+.header__date-and-location {
+  margin: ;
+}
+
+.header__user-container {
+  display: flex;
+}
