@@ -1,0 +1,21 @@
+.modal__content_type_image {
+max-width: 498px;
+max-height: 610px;
+padding: 0;
+
+  
+}
+
+.modal__footer {
+  display: flex;
+}
+
+.modal__image {
+  max-width: 498px;
+  max-height: 498px;
+ 
+}
+
+.modal__caption {
+
+}

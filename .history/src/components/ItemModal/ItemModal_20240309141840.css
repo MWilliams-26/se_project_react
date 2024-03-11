@@ -1,0 +1,17 @@
+.modal__content_type_image {
+
+  
+}
+
+.modal__footer {
+  display: flex;
+}
+
+.modal__image {
+  max-width: fit-content;
+ 
+}
+
+.modal__caption {
+
+}

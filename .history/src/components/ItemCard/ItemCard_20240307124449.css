@@ -1,0 +1,13 @@
+.card {
+  width: 323px;
+  /* border: 1px;
+  border-radius: 20px; */
+}
+
+.card__name {
+  position: absolute;
+  top: 15px;
+}
+
+.card__image {}
+

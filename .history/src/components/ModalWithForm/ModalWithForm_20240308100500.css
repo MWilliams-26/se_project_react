@@ -1,0 +1,23 @@
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #0000004D;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal__close {
+  position: absolute;
+  top: 20px;
+  right: 28px;
+}
+
+.modal__content {
+  background-color: #FFFFFF;
+  position: relative;
+  p28.28.
+}
