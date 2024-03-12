@@ -1,3 +1,0 @@
-import "./Modal"
-
-const ModalWithForm = {}
