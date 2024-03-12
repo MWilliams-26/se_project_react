@@ -92,7 +92,7 @@ function App() {
           <label
             htmlFor="cold"
             className="modal__label modal__label_type_radio">
-            <input id="cold" type="radio" className="modal__radio-input" name="weather-type" /> Cold
+            <input id="cold" type="radio" className="modal__radio-input" name="weather-type"/> Cold
           </label>
         </fieldset>
       </ModalWithForm>
