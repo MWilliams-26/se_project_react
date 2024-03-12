@@ -15,7 +15,7 @@ function App() {
     temp: { F: 999 },
     city: "",
   });
-  const [activeModal, setActiveModal] = useState("");
+  const [activeModal, setActiveModal] = useState("isOpen");
   const [selectedCard, setSelectedCard] = useState({});
 
   const handleAddClick = () => {
@@ -54,7 +54,6 @@ function App() {
         <Footer />
       </div>
       <ModalWithForm
-        isOpen={activeModal === "add-garment"}
         title="New garment"
         buttonText="Add Garment"
         activeModal={activeModal}
