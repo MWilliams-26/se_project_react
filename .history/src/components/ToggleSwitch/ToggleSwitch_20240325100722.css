@@ -1,0 +1,6 @@
+.switch {
+  display: flex;
+  position: relative;
+}
+
+.switch__box

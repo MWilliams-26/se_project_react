@@ -1,0 +1,34 @@
+.switch {
+  display: flex;
+  position: relative;
+  margin-left: 666px;
+  al
+}
+
+.switch__box {
+  border-radius: 25px;
+  border: 2px solid black;
+  width: 56px;
+  height: 28px;
+  appearance: none;
+  /* margin-left: 666px; */
+}
+
+.switch__slider {
+  border-radius: 20px;
+  width: 28px;
+  height: 28px;
+  background-color: black;
+  position: absolute;
+  text-align: center;
+  color: white;
+  cursor: pointer;
+}
+
+.switch__slider-F {
+
+}
+
+.switch__slider-C {
+
+}

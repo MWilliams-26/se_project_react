@@ -1,0 +1,16 @@
+.clothes-section {
+  display: flex;
+}
+
+.clothes-section__header {
+  display: flex;
+}
+
+.clothes-section__text {
+  width: 94px;
+  height: 25px;
+}
+.clothes-section__button {
+  width: 88px;
+  height: ;
+}
