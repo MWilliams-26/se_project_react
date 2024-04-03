@@ -16,7 +16,7 @@ import Profile from '../Profile/Profile';
 function App() {
   const [weatherData, setWeatherData] = useState({
     type: "",
-    temp: { F: 999, C: 999 },
+    temp: { F: 999 },
     city: "",
   });
   const [activeModal, setActiveModal] = useState("");
@@ -96,17 +96,18 @@ function App() {
         </div>
         {activeModal === "add-garment" && (
           <AddItemModal
-            isOpen={activeModal === "add-garment"}
             onClose={closeActiveModal}
-            activeModal={activeModal}
+            isOpen={activeModal === "add-garment"}
             onAddItem={onAddItem}
           />
         )}
-        <ItemModal
-          isOpen={activeModal === "preview"}
-          card={selectedCard}
-          onClose={closeActiveModal}
-        />
+        {activeModal === "preview" && (
+          <ItemModal 
+            activeModal={activeModal}
+            card={selectedCard}
+            onClose={closeActiveModal}
+          />
+        )}
       </CurrentTemperatureUnitContext.Provider>
     </div >
   );

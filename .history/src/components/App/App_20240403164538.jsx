@@ -96,7 +96,7 @@ function App() {
         </div>
         {activeModal === "add-garment" && (
           <AddItemModal
-            isOpen={activeModal === "add-garment"}
+            isOpen={activeModal === ""}
             onClose={closeActiveModal}
             activeModal={activeModal}
             onAddItem={onAddItem}

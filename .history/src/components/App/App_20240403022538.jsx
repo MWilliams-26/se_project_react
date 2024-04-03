@@ -94,19 +94,17 @@ function App() {
 
           <Footer />
         </div>
-        {activeModal === "add-garment" && (
-          <AddItemModal
-            isOpen={activeModal === "add-garment"}
-            onClose={closeActiveModal}
-            activeModal={activeModal}
-            onAddItem={onAddItem}
+        <AddItemModal
+          onClose={closeActiveModal}
+          activeModal={activeModal}
+          onAddItem={onAddItem}
           />
-        )}
         <ItemModal
-          isOpen={activeModal === "preview"}
+          isOpen={activeModal === "add-garment"}
           card={selectedCard}
           onClose={closeActiveModal}
         />
+
       </CurrentTemperatureUnitContext.Provider>
     </div >
   );

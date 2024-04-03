@@ -96,7 +96,6 @@ function App() {
         </div>
         {activeModal === "add-garment" && (
           <AddItemModal
-            isOpen={activeModal === "add-garment"}
             onClose={closeActiveModal}
             activeModal={activeModal}
             onAddItem={onAddItem}
@@ -107,6 +106,7 @@ function App() {
           card={selectedCard}
           onClose={closeActiveModal}
         />
+
       </CurrentTemperatureUnitContext.Provider>
     </div >
   );
