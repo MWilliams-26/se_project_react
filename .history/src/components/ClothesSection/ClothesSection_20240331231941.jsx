@@ -1,3 +1,0 @@
-function ClothesSection() {
-  return
-}

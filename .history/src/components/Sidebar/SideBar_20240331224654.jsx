@@ -1,5 +1,0 @@
-function SideBar() {
-  return (
-     div
-  )
-}
