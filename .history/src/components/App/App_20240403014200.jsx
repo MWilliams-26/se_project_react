@@ -84,7 +84,7 @@ function App() {
               path="/profile"
               element={
                 <Profile
-                  handleCardClick={handleCardClick}
+                  handleAddClick={handleCardClick}
                 />
               }
             />

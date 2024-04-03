@@ -19,7 +19,7 @@ function App() {
     temp: { F: 999 },
     city: "",
   });
-  const [activeModal, setActiveModal] = useState("");
+  const [activeModal, setActiveModal] = useState("preview");
   const [selectedCard, setSelectedCard] = useState({});
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState('F');
 
@@ -76,7 +76,7 @@ function App() {
               element={
                 <Main
                   weatherData={weatherData}
-                  handleCardClick={handleCardClick}
+                  onCardClick={handleCardClick}
                 />
               }
             />
@@ -84,7 +84,7 @@ function App() {
               path="/profile"
               element={
                 <Profile
-                  handleCardClick={handleCardClick}
+                  onCardClick={handleCardClick}
                 />
               }
             />
@@ -103,6 +103,7 @@ function App() {
           <ItemModal 
             activeModal={activeModal}
             card={selectedCard}
+            isOpen={activeModal === "preview"}
             onClose={closeActiveModal}
           />
         )}

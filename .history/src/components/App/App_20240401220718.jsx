@@ -74,20 +74,15 @@ function App() {
             <Route
               path="/"
               element={
-                <Main
-                  weatherData={weatherData}
-                  handleCardClick={handleCardClick}
-                />
+                <Main 
+                  weatherData={weatherData} 
+                  onCardClick={handleCardClick} 
+                  />
               }
             />
-            <Route
-              path="/profile"
-              element={
-                <Profile
-                  handleCardClick={handleCardClick}
-                />
-              }
-            />
+            <Route 
+              path="/profile" 
+              element={<Profile onCardClick={handleCardClick} />} />
           </Routes>
 
           <Footer />
@@ -100,9 +95,10 @@ function App() {
           />
         )}
         {activeModal === "preview" && (
-          <ItemModal 
+          <ItemModal
             activeModal={activeModal}
             card={selectedCard}
+            isOpen={activeModal === "preview"}
             onClose={closeActiveModal}
           />
         )}

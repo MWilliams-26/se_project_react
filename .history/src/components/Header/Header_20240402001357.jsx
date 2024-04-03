@@ -16,23 +16,23 @@ function Header({ handleAddClick, weatherData }) {
 
   return (
     <header className="header">
-      <Link to="/">
-        <img className="header__logo" src={logo} alt="logo" />
+      <Link>
+
+      <img className="header__logo" src={logo} alt="logo"/>
+      
       </Link>
       <p className="header__date-and-location">{currentDate}, {weatherData.city}</p>
-      <ToggleSwitch />
+        <ToggleSwitch />
       <button
         onClick={handleAddClick}
         type="button"
         className="header__add-clothes-btn">
         + Add clothes
       </button>
-      <Link to="/profile">
-        <div className="header__user-container">
-          <p className="header__username">Terrence Tegegne</p>
-          <img src={avatar} alt="avatar" className="header__user-avatar" />
-        </div>
-      </Link>
+      <div className="header__user-container">
+        <p className="header__username">Terrence Tegegne</p>
+        <img src={avatar} alt="avatar" className="header__user-avatar" />
+      </div>
     </header>
   );
 }

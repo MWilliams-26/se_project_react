@@ -84,7 +84,7 @@ function App() {
               path="/profile"
               element={
                 <Profile
-                  handleCardClick={handleCardClick}
+                  onCardClick={handleCardClick}
                 />
               }
             />
@@ -103,6 +103,7 @@ function App() {
           <ItemModal 
             activeModal={activeModal}
             card={selectedCard}
+            isOpen={activeModal === "preview"}
             onClose={closeActiveModal}
           />
         )}
