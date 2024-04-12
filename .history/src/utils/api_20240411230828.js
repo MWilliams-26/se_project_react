@@ -28,14 +28,14 @@ export default class Api {
     }).then(this._checkResponse);
   }
 
-  addNewItem({ name, imageUrl, weather }) {
+  addNewItem({ name, imageUrl, w }) {
     return fetch(`${this.baseUrl}/items`, {
       method: "POST",
       headers: this.headers,
       body: JSON.stringify({
         name,
         imageUrl,
-        weather,
+        weatherType,
       }),
     }).then(this._checkResponse);
   }

@@ -5,7 +5,7 @@ const AddItemModal = ({ onClose, onAddItem, isOpen }) => {
 
   const [name, setName] = useState("");
   const [imageUrl, setUrl] = useState("");
-  const [weather, setWeatherType] = useState("");
+  const [weatherType, setWeatherType] = useState("");
 
   const handleNameChange = (e) => {
     console.log(e.target.value);
@@ -23,7 +23,7 @@ const AddItemModal = ({ onClose, onAddItem, isOpen }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddItem({ name, imageUrl, weather });
+    onAddItem({ name, imageUrl, weatherType });
   }
 
   useEffect(() => {
@@ -31,6 +31,7 @@ const AddItemModal = ({ onClose, onAddItem, isOpen }) => {
       setName("");
       setUrl("");
       setWeatherType("");
+      console.log(we)
     }
   }, [isOpen])
 

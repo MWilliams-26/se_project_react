@@ -35,7 +35,7 @@ export default class Api {
       body: JSON.stringify({
         name,
         imageUrl,
-        weather,
+        weatherType,
       }),
     }).then(this._checkResponse);
   }
