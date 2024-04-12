@@ -13,10 +13,10 @@ function WeatherCard({ weatherData }) {
   });
 
   let weatherOption;
-  if (!filteredOptions) {
+  if (filteredOptions) {
     weatherOption = defaultWeatherOptions[weatherData.isDay ? "day" : "night"];
   } else {
-    weatherOption = filteredOptions;
+    weatherOption = filteredOptions[0];
   }
 
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
