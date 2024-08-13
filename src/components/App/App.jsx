@@ -91,8 +91,8 @@ function App() {
     api
       .getItems()
       .then((data) => {
-        console.log(data);
-        setClothingItems(data.reverse());
+        // console.log(data);
+        setClothingItems(data);
       })
       .catch(console.error);
   }, []);
