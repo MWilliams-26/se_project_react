@@ -44,7 +44,7 @@ function App() {
   }
 
   const handleToggleSwitchChange = () => {
-    setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F"); 
+    setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
   };
 
   // const onAddItem = (values) => {
@@ -91,8 +91,8 @@ function App() {
     api
       .getItems()
       .then((data) => {
-        // console.log(data);
-        setClothingItems(data);
+        console.log(data);
+        setClothingItems(data.reverse());
       })
       .catch(console.error);
   }, []);
@@ -142,7 +142,7 @@ function App() {
           onDelete={handleItemDelete}
         />
       </CurrentTemperatureUnitContext.Provider>
-    </div >
+    </div>
   );
 }
 
