@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 const AddItemModal = ({ onClose, onAddItem, isOpen }) => {
@@ -33,8 +33,6 @@ const AddItemModal = ({ onClose, onAddItem, isOpen }) => {
       setWeatherType("");
     }
   }, [isOpen])
-
-
 
   return (
     <ModalWithForm
