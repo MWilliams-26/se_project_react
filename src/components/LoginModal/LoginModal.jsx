@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-const LoginModal = ({ isOpen, onClose, onLogin }) => {
+const LoginModal = ({ isOpen, onClose, onLogin, handleRegistrationClick }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -19,13 +19,6 @@ const LoginModal = ({ isOpen, onClose, onLogin }) => {
     e.preventDefault();
     onLogin(email, password);
   };
-
-  useEffect(() => {
-    if (isOpen) {
-      setEmail("");
-      setPassword("");
-    }
-  }, [isOpen]);
 
   return (
     <ModalWithForm

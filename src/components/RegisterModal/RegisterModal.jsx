@@ -28,9 +28,16 @@ const RegisterModal = ({ onClose, onRegister, isOpen }) => {
         setAvatar(e.target.value);
     };
 
+    const newUser = {
+        email,
+        password,
+        name,
+        avatar,
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        onRegister({ email, password, name, avatar });
+        onRegister(newUser);
     };
 
     useEffect(() => {

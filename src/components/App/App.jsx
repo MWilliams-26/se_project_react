@@ -87,6 +87,9 @@ function App() {
     register({ email, password, name, avatar })
       .then((data) => {
         console.log(data);
+        setIsLoggedIn(true);
+        setCurrentUser(data);
+        Navigate("/profile");
         closeActiveModal();
       })
       .catch((err) => console.log(err));
@@ -122,7 +125,7 @@ function App() {
   }, []);
 
   return (
-    <CurrentUserContext.Provider value={currentUser}>
+    <CurrentUserContext.Provider value={{ currentUser, setCurrentUser }}>
       <div className='page'>
         <CurrentTemperatureUnitContext.Provider value={{ currentTemperatureUnit, handleToggleSwitchChange }} >
           <div className='page__content'>
@@ -146,11 +149,12 @@ function App() {
               <Route
                 path="/profile"
                 element={
-                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                  <ProtectedRoute>
                     <Profile
                       onCardClick={handleCardClick}
                       clothingItems={clothingItems}
                       handleAddClick={handleAddClick}
+                      setIsLoggedIn={setIsLoggedIn}
                     />
                   </ProtectedRoute>
                 }
@@ -171,12 +175,12 @@ function App() {
             onDelete={handleItemDelete}
           />
           <RegisterModal
-            activeModal={activeModal}
+            activeModal={activeModal === "sign-up"}
             onClose={closeActiveModal}
             onRegistration={handleRegistration}
           />
           <LoginModal
-            activeModal={activeModal}
+            activeModal={activeModal === "login"}
             onClose={closeActiveModal}
             onLogin={handleLogin}
           />

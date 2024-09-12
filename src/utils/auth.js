@@ -30,3 +30,16 @@ export const login = ({ email, password }) => {
   });
 };
 
+export const checkToken = (token) => {
+  return request(`${baseUrl}/users/me`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  })
+  .then((res) => {
+    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+  })
+};
+
