@@ -1,10 +1,20 @@
 import "./ItemModal.css"
 import close from "../../assets/close.svg";
+import { useContext } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function ItemModal({ activeModal, onClose, card, onDelete }) {
   const handleItemDelete = () => {
     onDelete(card);
   };
+
+  const currentUser = useContext(CurrentUserContext);
+
+  const isOwn = selectedCard.owner === currentUser._id;
+
+  const itemDeleteButtonClassName = (
+    `item__delete-button ${isOwn ? 'item__delete-button_visible' : 'item__delete-button_hidden'}`
+  );
 
 
   return (
@@ -23,7 +33,11 @@ function ItemModal({ activeModal, onClose, card, onDelete }) {
               Weather: {card.weather}
             </p>
           </div>
-          <button onClick={handleItemDelete} type="button" className="modal__delete-btn">
+          <button
+            onClick={handleItemDelete}
+            type="button"
+            className={itemDeleteButtonClassName}
+          >
             Delete item
           </button>
         </div>

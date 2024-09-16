@@ -1,12 +1,22 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 
-const RegisterModal = ({ onClose, onRegister, isOpen }) => {
+const RegisterModal = ({ isOpen, handleRegistration, onClose }) => {
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
     const [avatar, setAvatar] = useState("");
+
+    useEffect(() => {
+        if (isOpen) {
+            setEmail("");
+            setPassword("");
+            setName("");
+            setAvatar("");
+        }
+    }, [isOpen])
 
     const handleEmailChange = (e) => {
         console.log(e.target.value);
@@ -28,31 +38,16 @@ const RegisterModal = ({ onClose, onRegister, isOpen }) => {
         setAvatar(e.target.value);
     };
 
-    const newUser = {
-        email,
-        password,
-        name,
-        avatar,
-    };
-
     const handleSubmit = (e) => {
         e.preventDefault();
-        onRegister(newUser);
+        handleRegistration({ email, password, name, avatar });
     };
-
-    useEffect(() => {
-        if (isOpen) {
-            setEmail("");
-            setPassword("");
-            setName("");
-            setAvatar("");
-        }
-    }, [isOpen]);
 
     return (
         <ModalWithForm
             isOpen={isOpen}
             title="Sign up"
+            name="register"
             buttonText="Sign up"
             onClose={onClose}
             onSubmit={handleSubmit}
