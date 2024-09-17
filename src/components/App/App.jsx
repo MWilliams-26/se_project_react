@@ -110,8 +110,8 @@ function App() {
 
   const handleRegistration = ({ email, password, name, avatar }) => {
     register({ email, password, name, avatar })
-      .then(() => {
-        handleLogin({ email, password });
+      .then((data) => {
+        handleLogin(data);
         closeActiveModal();
       })
       .catch((err) => console.log(err));
@@ -129,6 +129,13 @@ function App() {
         navigate("/profile");
       })
       .catch((err) => console.log(err));
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
+    setCurrentUser(null);
+    navigate("/login");
   }
 
   const handleProfileEdit = ({ name, avatar }) => {
@@ -152,11 +159,22 @@ function App() {
 
   useEffect(() => {
     getItems()
-      .then((data) => {
+      .then(({ data }) => {
         // console.log(data);
         setClothingItems(data);
       })
       .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    if (localStorage.getItem("jwt")) {
+      checkToken(localStorage.getItem("jwt"))
+        .then((data) => {
+          setCurrentUser(data);
+          setIsLoggedIn(true);
+        })
+        .catch((err) => console.log(err));
+    }
   }, []);
 
   return (
@@ -192,6 +210,7 @@ function App() {
                       clothingItems={clothingItems}
                       handleAddClick={handleAddClick}
                       handleProfileEditClick={handleProfileEditClick}
+                      handleLogout={handleLogout}
                       setIsLoggedIn={setIsLoggedIn}
                     />
                   </ProtectedRoute>

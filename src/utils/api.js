@@ -14,7 +14,7 @@ export const handleServerResponse = (res) => {
 };
 
 export function request(url, options) {
-    return fetch(`${baseUrl}${url}`, options).then(handleServerResponse);
+    return fetch(url, options).then(handleServerResponse);
 };
 
 export const getItems = () => {

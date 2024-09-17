@@ -4,14 +4,15 @@ import { useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 const EditProfileModal = ({ isOpen, onClose, updateUserProfile }) => {
+  const currentUser = useContext(CurrentUserContext);
+
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
 
-  const currentUser = useContext(CurrentUserContext);
 
   useEffect(() => {
-    setName(currentUser.name);
-    setAvatar(currentUser.avatar);
+    setName(currentUser?.name);
+    setAvatar(currentUser?.avatar);
   }, [currentUser]);
 
   const handleNameChange = (e) => {
