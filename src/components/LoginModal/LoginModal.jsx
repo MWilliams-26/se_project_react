@@ -1,30 +1,23 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 const LoginModal = ({ isOpen, onClose, onLogin }) => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [data, setData] = useState({
+    email: "",
+    password: "",
+  });
 
-  useEffect(() => {
-    if (isOpen) {
-      setEmail("");
-      setPassword("");
-    }
-  }, [isOpen])
-
-  const handleEmailChange = (e) => {
-    console.log(e.target.value);
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    console.log(e.target.value);
-    setPassword(e.target.value);
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onLogin({email, password});
+    onLogin(data);
   };
 
   return (
@@ -39,26 +32,32 @@ const LoginModal = ({ isOpen, onClose, onLogin }) => {
       <label className="modal__label">
         Email
         <input
-          className="modal__input"
           type="email"
-          value={email}
-          onChange={handleEmailChange}
-          required
+          className="modal__input"
+          id="email"
+          name="email"
+          placeholder="Email"
+          value={data.email}
+          onChange={handleChange}
+
         />
       </label>
       <label className="modal__label">
         Password
         <input
-          className="modal__input"
           type="password"
-          value={password}
-          onChange={handlePasswordChange}
-          required
+          className="modal__input"
+          id="password"
+          name="password"
+          placeholder="Password"
+          value={data.password}
+          onChange={handleChange}
+
         />
       </label>
       <div className="modal__button_container">
         <button type="submit" className="modal__add_submit">
-        Log in
+          Log in
         </button>
       </div>
     </ModalWithForm>

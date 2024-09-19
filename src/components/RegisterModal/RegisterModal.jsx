@@ -1,46 +1,28 @@
-import { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 
 const RegisterModal = ({ isOpen, handleRegistration, handleLoginClick, onClose }) => {
+    const [data, setData] = useState({
+        email: "",
+        password: "",
+        name: "",
+        avatar: "",
+    });
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [name, setName] = useState("");
-    const [avatar, setAvatar] = useState("");
-
-    useEffect(() => {
-        if (isOpen) {
-            setEmail("");
-            setPassword("");
-            setName("");
-            setAvatar("");
-        }
-    }, [isOpen])
-
-    const handleEmailChange = (e) => {
-        console.log(e.target.value);
-        setEmail(e.target.value);
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setData((prevData) => ({
+            ...prevData,
+            [name]: value,
+        }));
     };
-
-    const handlePasswordChange = (e) => {
-        console.log(e.target.value);
-        setPassword(e.target.value);
-    };
-
-    const handleNameChange = (e) => {
-        console.log(e.target.value);
-        setName(e.target.value);
-    };
-
-    const handleAvatarChange = (e) => {
-        console.log(e.target.value);
-        setAvatar(e.target.value);
-    };
+    
+ 
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        handleRegistration({ email, password, name, avatar });
+        handleRegistration(data);
     };
 
     return (
@@ -58,10 +40,11 @@ const RegisterModal = ({ isOpen, handleRegistration, handleLoginClick, onClose }
                     type="email"
                     className="modal__input"
                     id="email"
+                    name="email"
                     placeholder="Email"
-                    value={email}
-                    onChange={handleEmailChange}
-                    required
+                    value={data.email}
+                    onChange={handleChange}
+                    
                 />
             </label>
             <label htmlFor="password" className="modal__label">
@@ -70,10 +53,11 @@ const RegisterModal = ({ isOpen, handleRegistration, handleLoginClick, onClose }
                     type="password"
                     className="modal__input"
                     id="password"
+                    name="password"
                     placeholder="Password"
-                    value={password}
-                    onChange={handlePasswordChange}
-                    required
+                    value={data.password}
+                    onChange={handleChange}
+                    
                 />
             </label>
             <label htmlFor="name" className="modal__label">
@@ -82,10 +66,11 @@ const RegisterModal = ({ isOpen, handleRegistration, handleLoginClick, onClose }
                     type="text"
                     className="modal__input"
                     id="name"
+                    name="name"
                     placeholder="Name"
-                    value={name}
-                    onChange={handleNameChange}
-                    required
+                    value={data.name}
+                    onChange={handleChange}
+                    
                 />
             </label>
             <label htmlFor="avatar" className="modal__label">
@@ -94,10 +79,11 @@ const RegisterModal = ({ isOpen, handleRegistration, handleLoginClick, onClose }
                     type="url"
                     className="modal__input"
                     id="avatar"
+                    name="avatar"
                     placeholder="Avatar"
-                    value={avatar}
-                    onChange={handleAvatarChange}
-                    required
+                    value={data.avatar}
+                    onChange={handleChange}
+                    
                 />
             </label>
             <div className="modal__button_container">

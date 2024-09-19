@@ -110,10 +110,8 @@ function App() {
 
   const handleRegistration = ({ email, password, name, avatar }) => {
     register({ email, password, name, avatar })
-      .then((res) => {
-        setCurrentUser(res);
-        console.log(res);
-        handleLogin({ email, password });
+      .then(() => {
+        setIsLoggedIn(true);
         closeActiveModal();
       })
       .catch((err) => console.log(err));
@@ -122,6 +120,7 @@ function App() {
   const handleLogin = ({ email, password }) => {
     login({ email, password })
       .then((res) => {
+        setIsLoggedIn(true);
         localStorage.setItem("jwt", res.token);
         navigate("/profile");
         closeActiveModal();
@@ -132,7 +131,6 @@ function App() {
   const handleLogout = () => {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
-    setCurrentUser(null);
     navigate("/login");
   }
 
