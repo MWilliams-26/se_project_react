@@ -11,7 +11,7 @@ const ModalWithForm = ({ title, buttonText, children, onClose, isOpen, onSubmit 
         </button>
         <form className="modal__form" onSubmit={onSubmit}>
           {children}
-          <button type="submit" className="modal__submit">{buttonText}</button>
+          {/* <button type="submit" className="modal__submit">{buttonText}</button> */}
         </form>
       </div>
     </div>

@@ -13,7 +13,7 @@ import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperature
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import AddItemModal from '../AddItemModal/AddItemModal';
 import Profile from '../Profile/Profile';
-import { getItems, addNewItem, deleteItem, editUserProfile, addLike, removeLike } from '../../utils/api';
+import { getItems, addNewItem, deleteItem, updateCurrentUser, addLike, removeLike } from '../../utils/api';
 import { register, login, checkToken } from '../../utils/auth';
 import RegisterModal from '../RegisterModal/RegisterModal';
 import LoginModal from '../LoginModal/LoginModal';
@@ -110,8 +110,10 @@ function App() {
 
   const handleRegistration = ({ email, password, name, avatar }) => {
     register({ email, password, name, avatar })
-      .then((data) => {
-        handleLogin(data);
+      .then((res) => {
+        setCurrentUser(res);
+        console.log(res);
+        handleLogin({ email, password });
         closeActiveModal();
       })
       .catch((err) => console.log(err));
@@ -119,14 +121,10 @@ function App() {
 
   const handleLogin = ({ email, password }) => {
     login({ email, password })
-      .then((data) => {
-        localStorage.setItem("jwt", data.token);
-        return checkToken(data.token);
-      })
-      .then((data) => {
-        setCurrentUser(data);
-        setIsLoggedIn(true);
+      .then((res) => {
+        localStorage.setItem("jwt", res.token);
         navigate("/profile");
+        closeActiveModal();
       })
       .catch((err) => console.log(err));
   }
@@ -138,8 +136,8 @@ function App() {
     navigate("/login");
   }
 
-  const handleProfileEdit = ({ name, avatar }) => {
-    updateUser({ name, avatar })
+  const handleProfileEdit = ({ name, avatar, token }) => {
+    updateCurrentUser({ name, avatar, token })
       .then((res) => {
         setCurrentUser(res);
         closeActiveModal();
@@ -167,10 +165,10 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (localStorage.getItem("jwt")) {
+    if (!localStorage.getItem("jwt")) {
       checkToken(localStorage.getItem("jwt"))
-        .then((data) => {
-          setCurrentUser(data);
+        .then((res) => {
+          setCurrentUser(res);
           setIsLoggedIn(true);
         })
         .catch((err) => console.log(err));
@@ -183,11 +181,11 @@ function App() {
         <CurrentTemperatureUnitContext.Provider value={{ currentTemperatureUnit, handleToggleSwitchChange }} >
           <div className='page__content'>
             <Header
-              handleAddClick={handleAddClick}
-              weatherData={weatherData}
+              isLoggedIn={isLoggedIn}
               handleRegistrationClick={handleRegistrationClick}
               handleLoginClick={handleLoginClick}
-              isLoggedIn={isLoggedIn}
+              handleAddClick={handleAddClick}
+              weatherData={weatherData}
             />
             <Routes>
               <Route
@@ -235,6 +233,7 @@ function App() {
             isOpen={activeModal === "signup"}
             onClose={closeActiveModal}
             handleRegistration={handleRegistration}
+            handleLoginClick={handleLoginClick}
           />
           <LoginModal
             isOpen={activeModal === "login"}

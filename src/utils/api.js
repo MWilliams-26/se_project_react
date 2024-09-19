@@ -52,7 +52,7 @@ export const deleteItem = (id, token) => {
 };
 
 
-export const editUserProfile = ({ name, avatar, token }) => {
+export const updateCurrentUser = ({ name, avatar, token }) => {
   return request(`${baseUrl}/users/me`, {
     method: "PATCH",
     headers: {

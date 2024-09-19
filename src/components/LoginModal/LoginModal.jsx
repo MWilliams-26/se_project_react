@@ -56,6 +56,11 @@ const LoginModal = ({ isOpen, onClose, onLogin }) => {
           required
         />
       </label>
+      <div className="modal__button_container">
+        <button type="submit" className="modal__add_submit">
+        Log in
+        </button>
+      </div>
     </ModalWithForm>
   );
 };

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 
-const RegisterModal = ({ isOpen, handleRegistration, onClose }) => {
+const RegisterModal = ({ isOpen, handleRegistration, handleLoginClick, onClose }) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -100,6 +100,14 @@ const RegisterModal = ({ isOpen, handleRegistration, onClose }) => {
                     required
                 />
             </label>
+            <div className="modal__button_container">
+                <button type="submit" className="modal__add_submit" onSubmit={handleSubmit}>
+                    Sign up
+                </button>
+                <button type="submit" className="modal__login_submit" onClick={handleLoginClick}>
+                    or Login
+                </button>
+            </div>
         </ModalWithForm>
     )
 };

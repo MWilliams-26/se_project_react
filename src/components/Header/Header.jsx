@@ -8,6 +8,8 @@ import { useContext } from "react";
 
 
 function Header({ handleAddClick, weatherData, handleRegistrationClick, handleLoginClick, isLoggedIn }) {
+  const currentUser = useContext(CurrentUserContext);
+  console.log(CurrentUserContext);
 
   const currentDate = new Date().toLocaleString('default',
     {
@@ -15,19 +17,20 @@ function Header({ handleAddClick, weatherData, handleRegistrationClick, handleLo
       day: 'numeric'
     });
 
-  const currentUser = useContext(CurrentUserContext);
 
   return (
     <header className="header">
       <Link to="/">
         <img className="header__logo" src={logo} alt="logo" />
       </Link>
+
       <p className="header__date-and-location">
         {currentDate}, {weatherData.city}
       </p>
       <ToggleSwitch />
+
       {isLoggedIn ? (
-        <>
+        <div className="header__user-container">
           <button
             onClick={handleAddClick}
             type="button"
@@ -36,31 +39,27 @@ function Header({ handleAddClick, weatherData, handleRegistrationClick, handleLo
             + Add clothes
           </button>
           <Link to="/profile" className="header__link">
-            <div className="header__user-container">
-              <p className="header__username">{currentUser?.name}</p>
-              {currentUser?.avatar ? (
-                <img
-                  src={currentUser?.avatar}
-                  alt={currentUser?.name}
-                  className="header__user-avatar"
-                />
-              ) : (
-                <div className="header__avatar-placeholder">
-                  {currentUser?.name?.charAt(0).toUpperCase() || ""}
-                </div>
-              )}
-            </div>
+            <p className="header__username">{currentUser.name}</p>
+            <img
+              src={currentUser.avatar}
+              alt={currentUser.name}
+              className="header__user-avatar"
+            />
           </Link>
-        </>
-      ) : (
-        <div className="header__auth">
-          <button className="header__register-btn" onClick={handleRegistrationClick}>
-            Sign Up
-          </button>
-          <button className="header__login-btn" onClick={handleLoginClick}>
-            Log In
-          </button>
         </div>
+      ) : (
+        <>
+          {/* <div className="header__avatar-placeholder">
+            {currentUser?.name.charAt(0).toUpperCase()} </div> */}
+          <div className="header__auth">
+            <button className="header__register-btn" onClick={handleRegistrationClick}>
+              Sign Up
+            </button>
+            <button className="header__login-btn" onClick={handleLoginClick}>
+              Log In
+            </button>
+          </div>
+        </>
       )}
     </header>
   );
