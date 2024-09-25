@@ -36,7 +36,12 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState('F');
   const [clothingItems, setClothingItems] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState({
+    name: "",
+    avatar: "",
+    email: "",
+    _id: "",
+  });
 
   const navigate = useNavigate();
 
@@ -111,10 +116,10 @@ function App() {
   const handleRegistration = ({ email, password, name, avatar }) => {
     register({ email, password, name, avatar })
       .then(() => {
-        setIsLoggedIn(true);
+        handleLogin({ email, password });
         closeActiveModal();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("Registration failed:", err));
   }
 
   const handleLogin = ({ email, password }) => {

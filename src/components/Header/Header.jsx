@@ -39,7 +39,7 @@ function Header({ handleAddClick, weatherData, handleRegistrationClick, handleLo
             + Add clothes
           </button>
           <Link to="/profile" className="header__link">
-            <p className="header__username">{currentUser.name}</p>
+            <p className="header__username">{currentUser?.name}</p>
             <img
               src={currentUser.avatar}
               alt={currentUser.name}

@@ -1,7 +1,7 @@
 import "./ModalWithForm.css"
 import close from "../../assets/close.svg";
 
-const ModalWithForm = ({ title, buttonText, children, onClose, isOpen, onSubmit }) => {
+const ModalWithForm = ({ title, buttonText, redirectText, handleTextButton, children, onClose, isOpen, onSubmit }) => {
   return (
     <div className={`modal ${isOpen && "modal_opened"}`}>
       <div className="modal__content">
@@ -11,7 +11,10 @@ const ModalWithForm = ({ title, buttonText, children, onClose, isOpen, onSubmit 
         </button>
         <form className="modal__form" onSubmit={onSubmit}>
           {children}
-          {/* <button type="submit" className="modal__submit">{buttonText}</button> */}
+          <div className="modal__button_container">
+            <button type="submit" className="modal__submit modal__submit">{buttonText}</button>
+            <button type="button" className="modal__text-button" onClick={handleTextButton}>{redirectText}</button>
+          </div>
         </form>
       </div>
     </div>

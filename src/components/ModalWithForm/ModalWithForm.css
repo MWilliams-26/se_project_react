@@ -87,11 +87,32 @@
   flex-direction: column;
 }
 
+.modal__button_container {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+}
+
 .modal__submit {
-  border: 1px solid #0000004D;
+  border: none;
   width: 124px;
   height: 36px;
   border-radius: 4px;
   cursor: pointer;
+  color: #ffffff;
+}
+
+.modal__submit:disabled {
+ opacity: 0.3;
+}
+
+.modal__submit:hover {
+  opacity: 0.8;
+}
+
+.modal__text-button {
+  border: none;
+  background-color: #fff;
   color: #0000004D;
+  cursor: pointer;
 }

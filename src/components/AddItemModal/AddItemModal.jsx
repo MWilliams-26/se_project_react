@@ -82,6 +82,11 @@ const AddItemModal = ({ onClose, onAddItem, isOpen }) => {
           <input id="cold" type="radio" className="modal__radio-input" name="radioButton" value="cold" onChange={handleWeatherTypeChange} /> Cold
         </label>
       </fieldset>
+      <div className="modal__button_container">
+        <button type="submit" className="modal__add_submit">
+          Add Garment
+        </button>
+      </div>
     </ModalWithForm>
   )
 

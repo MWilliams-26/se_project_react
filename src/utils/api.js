@@ -26,7 +26,7 @@ export const getItems = () => {
   }).then(handleServerResponse);
 };
 
-export const addNewItem = ({ name, imageUrl, weather, token }) => {
+export const addNewItem = (name, imageUrl, weather, token) => {
   return request(`${baseUrl}/items`, {
     method: "POST",
     headers: {
@@ -52,7 +52,7 @@ export const deleteItem = (id, token) => {
 };
 
 
-export const updateCurrentUser = ({ name, avatar, token }) => {
+export const updateCurrentUser = (name, avatar, token) => {
   return request(`${baseUrl}/users/me`, {
     method: "PATCH",
     headers: {

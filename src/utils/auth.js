@@ -1,4 +1,4 @@
-import { request, baseUrl, handleServerResponse } from "./api";
+import { request, baseUrl } from "./api";
 
 export const register = ({ email, password, name, avatar }) => {
   return request(`${baseUrl}/signup`, {
@@ -12,7 +12,7 @@ export const register = ({ email, password, name, avatar }) => {
       name,
       avatar,
     }),
-  }).then(handleServerResponse);
+  })
 };
 
 export const login = ({ email, password }) => {
@@ -25,7 +25,7 @@ export const login = ({ email, password }) => {
       email,
       password,
     }),
-  }).then(handleServerResponse);
+  })
 };
 
 export const checkToken = (token) => {
@@ -35,6 +35,6 @@ export const checkToken = (token) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-  }).then(handleServerResponse);
+  })
 };
 
