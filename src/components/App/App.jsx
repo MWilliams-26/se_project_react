@@ -130,7 +130,7 @@ function App() {
         navigate("/profile");
         closeActiveModal();
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("Login failed:", err));
   }
 
   const handleLogout = () => {
