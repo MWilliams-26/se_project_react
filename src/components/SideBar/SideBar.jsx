@@ -10,7 +10,10 @@ const SideBar = ({ onEditProfileModal, onLogout }) => {
     <>
       <div className="sidebar">
         <div className="sidebar__user-info">
-          <img src={currentUser.avatar || avatar} alt="avatar" className="sidebar__avatar" />
+          <img 
+          src={currentUser.avatar} 
+          alt="avatar" 
+          className="sidebar__avatar" />
           <p className="sidebar__username">{currentUser.name}</p>
         </div>
         <div className="sidebar__button-container">

@@ -30,36 +30,40 @@ function Header({ handleAddClick, weatherData, handleRegistrationClick, handleLo
       <ToggleSwitch />
 
       {isLoggedIn ? (
-        <div className="header__user-container">
-          <button
-            onClick={handleAddClick}
-            type="button"
-            className="header__add-clothes-btn"
-          >
-            + Add clothes
-          </button>
-          <Link to="/profile" className="header__link">
-            <p className="header__username">{currentUser?.name}</p>
-            <img
-              src={currentUser.avatar}
-              alt={currentUser.name}
-              className="header__user-avatar"
-            />
-          </Link>
-        </div>
-      ) : (
         <>
-          {/* <div className="header__avatar-placeholder">
-            {currentUser?.name.charAt(0).toUpperCase()} </div> */}
-          <div className="header__auth">
-            <button className="header__register-btn" onClick={handleRegistrationClick}>
-              Sign Up
+          <div className="header__user-container">
+            <button
+              onClick={handleAddClick}
+              type="button"
+              className="header__add-clothes-btn"
+            >
+              + Add clothes
             </button>
-            <button className="header__login-btn" onClick={handleLoginClick}>
-              Log In
-            </button>
+            <Link to="/profile" className="header__link">
+              <p className="header__username">{currentUser?.name}</p>
+              {currentUser?.avatar ? (
+                <img
+                  src={currentUser?.avatar}
+                  alt="Terrence Tegegne"
+                  className="header__user-avatar"
+                />
+              ) : (
+                <div className="header__avatar-placeholder">
+                  {currentUser?.name.charAt(0).toUpperCase()}
+                </div>
+              )}
+            </Link>
           </div>
         </>
+      ) : (
+        <div className="header__auth-container">
+          <button className="header__register-btn" onClick={handleRegistrationClick}>
+            Sign Up
+          </button>
+          <button className="header__login-btn" onClick={handleLoginClick}>
+            Log In
+          </button>
+        </div>
       )}
     </header>
   );

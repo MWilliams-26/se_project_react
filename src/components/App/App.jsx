@@ -212,7 +212,6 @@ function App() {
                       handleAddClick={handleAddClick}
                       handleProfileEditClick={handleProfileEditClick}
                       handleLogout={handleLogout}
-                      setIsLoggedIn={setIsLoggedIn}
                     />
                   </ProtectedRoute>
                 }
@@ -236,12 +235,13 @@ function App() {
             isOpen={activeModal === "signup"}
             onClose={closeActiveModal}
             handleRegistration={handleRegistration}
-            handleLoginClick={handleLoginClick}
+            handleTextButton={handleLoginClick}
           />
           <LoginModal
             isOpen={activeModal === "login"}
             onClose={closeActiveModal}
             onLogin={handleLogin}
+            handleTextButton={handleRegistrationClick}
           />
           <EditProfileModal
             isOpen={activeModal === "edit-profile"}

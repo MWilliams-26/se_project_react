@@ -41,6 +41,7 @@ const LoginModal = ({ isOpen, onClose, onLogin, handleTextButton }) => {
           placeholder="Email"
           value={data.email}
           onChange={handleChange}
+          required
 
         />
       </label>
@@ -54,6 +55,7 @@ const LoginModal = ({ isOpen, onClose, onLogin, handleTextButton }) => {
           placeholder="Password"
           value={data.password}
           onChange={handleChange}
+          required
 
         />
       </label>

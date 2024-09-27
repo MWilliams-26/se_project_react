@@ -17,7 +17,7 @@ const RegisterModal = ({ isOpen, handleRegistration, handleTextButton, onClose }
             [name]: value,
         }));
     };
-  
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -31,7 +31,7 @@ const RegisterModal = ({ isOpen, handleRegistration, handleTextButton, onClose }
             name="register"
             buttonText="Sign up"
             redirectText="or Log in"
-            onClick={handleTextButton}
+            handleTextButton={handleTextButton}
             onClose={onClose}
             onSubmit={handleSubmit}
         >
@@ -45,6 +45,7 @@ const RegisterModal = ({ isOpen, handleRegistration, handleTextButton, onClose }
                     placeholder="Email"
                     value={data.email}
                     onChange={handleChange}
+                    required
 
                 />
             </label>
@@ -58,6 +59,7 @@ const RegisterModal = ({ isOpen, handleRegistration, handleTextButton, onClose }
                     placeholder="Password"
                     value={data.password}
                     onChange={handleChange}
+                    required
 
                 />
             </label>
@@ -71,6 +73,7 @@ const RegisterModal = ({ isOpen, handleRegistration, handleTextButton, onClose }
                     placeholder="Name"
                     value={data.name}
                     onChange={handleChange}
+                    required
 
                 />
             </label>
@@ -84,6 +87,7 @@ const RegisterModal = ({ isOpen, handleRegistration, handleTextButton, onClose }
                     placeholder="Avatar"
                     value={data.avatar}
                     onChange={handleChange}
+                    required
 
                 />
             </label>
