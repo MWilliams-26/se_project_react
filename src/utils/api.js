@@ -1,7 +1,7 @@
 export const baseUrl = 'http://localhost:3001';
 
 export const getUserInfo = (token) => {
-  return request(`${baseUrl}/users/me`, {
+  return fetch(`${baseUrl}/users/me`, {
     method: "GET",
     headers: {
       "Content-Type": "applications/json",
@@ -63,7 +63,7 @@ export const updateCurrentUser = (name, avatar, token) => {
       name,
       avatar,
     }),
-  }).then(handleServerResponse);
+  })
 };
 
 export const addLike = (id, token) => {

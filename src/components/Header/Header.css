@@ -20,6 +20,7 @@
   padding: 0;
   cursor: pointer;
   font-weight: 700;
+  background-color: transparent;
 }
 
 .header__auth-container {
@@ -33,6 +34,7 @@
   padding: 0;
   cursor: pointer;
   font-weight: 700;
+  background-color: transparent;
 }
 
 .header__login-btn {
@@ -41,6 +43,7 @@
   padding: 0;
   cursor: pointer;
   font-weight: 700;
+  background-color: transparent;
 }
 
 .header__link {
@@ -54,6 +57,26 @@
   gap: 12px;
 }
 
+.header__user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.header__avatar-placeholder {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
 .header__username {
+  font-size: 20px;
+  color: black;
+  width: 157px;
+  height: 25px;
+  font-weight: 700;
+  line-height: 24.8px;
   margin: 0;
+  font-family: Cabinet Grotesk;
+
 }

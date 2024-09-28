@@ -8,15 +8,15 @@ import { useContext } from "react";
 
 
 function Header({ handleAddClick, weatherData, handleRegistrationClick, handleLoginClick, isLoggedIn }) {
-  const currentUser = useContext(CurrentUserContext);
-  console.log(CurrentUserContext);
-
+  
   const currentDate = new Date().toLocaleString('default',
-    {
-      month: 'long',
-      day: 'numeric'
-    });
-
+  {
+    month: 'long',
+    day: 'numeric'
+  });
+  
+  const currentUser = useContext(CurrentUserContext);
+  console.log(currentUser);
 
   return (
     <header className="header">
@@ -41,10 +41,10 @@ function Header({ handleAddClick, weatherData, handleRegistrationClick, handleLo
             </button>
             <Link to="/profile" className="header__link">
               <p className="header__username">{currentUser?.name}</p>
-              {currentUser?.avatar ? (
+              {currentUser.avatar ? (
                 <img
                   src={currentUser?.avatar}
-                  alt="Terrence Tegegne"
+                  alt={currentUser.name}
                   className="header__user-avatar"
                 />
               ) : (
@@ -68,5 +68,4 @@ function Header({ handleAddClick, weatherData, handleRegistrationClick, handleLo
     </header>
   );
 }
-
 export default Header;

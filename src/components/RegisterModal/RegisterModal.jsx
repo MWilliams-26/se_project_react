@@ -85,7 +85,7 @@ const RegisterModal = ({ isOpen, handleRegistration, handleTextButton, onClose }
                     id="avatar"
                     name="avatar"
                     placeholder="Avatar"
-                    value={data.avatar}
+                    value={data.avatar || ""}
                     onChange={handleChange}
                     required
 
