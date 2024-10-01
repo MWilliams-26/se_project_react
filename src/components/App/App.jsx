@@ -10,7 +10,7 @@ import ProtectedRoute from '../../ProtectedRoute/ProtectedRoute';
 import { getWeather, filterWeatherData } from '../../utils/weatherApi';
 import { coordinates, APIkey } from '../../utils/constants';
 import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperatureUnitContext';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import CurrentUserContext from '../../contexts/CurrentUserContext';
 import AddItemModal from '../AddItemModal/AddItemModal';
 import Profile from '../Profile/Profile';
 import { getItems, addNewItem, deleteItem, updateCurrentUser, addLike, removeLike } from '../../utils/api';
@@ -42,6 +42,7 @@ function App() {
     email: "",
     _id: "",
   });
+  console.log(currentUser);
 
   const navigate = useNavigate();
 
@@ -138,14 +139,14 @@ const handleLogin = ({ email, password }) => {
 const handleLogout = () => {
   localStorage.removeItem("jwt");
   setIsLoggedIn(false);
-  navigate("/login");
+  navigate("/");
 }
 
-const handleProfileEdit = ({ name, avatar, token }) => {
-  updateCurrentUser({ name, avatar, token })
-    .then((data) => {
-      setCurrentUser(data);
-      closeActiveModal();
+const updateUserProfile = ({ name, avatar, token }) => {
+  updateCurrentUser(name, avatar, token)
+  .then((data) => {
+    setCurrentUser(data);
+    closeActiveModal();
     })
     .catch((err) => console.log(err));
 }
@@ -163,7 +164,7 @@ console.log(weatherData.temp);
 useEffect(() => {
   getItems()
     .then(({ data }) => {
-      // console.log(data);
+      console.log(data);
       setClothingItems(data);
     })
     .catch(console.error);
@@ -174,7 +175,7 @@ useEffect(() => {
   if (token) {
     checkToken(localStorage.getItem("jwt"))
       .then((data) => {
-        setCurrentUser(data.user);
+        setCurrentUser(data);
         setIsLoggedIn(true);
       })
       .catch((err) => console.log(err));
@@ -249,7 +250,8 @@ return (
         <EditProfileModal
           isOpen={activeModal === "edit-profile"}
           onClose={closeActiveModal}
-          handleProfileEdit={handleProfileEdit}
+          updateUserProfile={updateUserProfile}
+          token={localStorage.getItem("jwt")}
         />
       </CurrentTemperatureUnitContext.Provider>
     </div>
