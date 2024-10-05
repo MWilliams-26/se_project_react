@@ -1,16 +1,7 @@
 .sidebar {
   display: flex;
-  flex-direction: column;
-  gap: 24px;
   width: 229px;
   height: 138px;
-}
-
-.sidebar__user-info {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 16px;
 }
 
 .sidebar__avatar {
@@ -30,12 +21,6 @@
   color: black;
 }
 
-.sidebar__button-container {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
-}
 .sidebar__button {
   margin: 0;
   border: none;
@@ -45,5 +30,4 @@
   font-size: 20px;
   line-height: 24.8px;
   color: black;
-  background-color: transparent;
 }

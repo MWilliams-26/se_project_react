@@ -15,14 +15,11 @@
 }
 
 .header__add-clothes-btn {
-  width: 116px;
-  height: 24px;
   margin: 0;
   border: none;
   padding: 0;
   cursor: pointer;
   font-weight: 700;
-  line-height: 24px;
   background-color: transparent;
 }
 
@@ -50,8 +47,6 @@
 }
 
 .header__link {
-  display: flex;
-  align-items: center;
   text-decoration: none;
   color: black;
 }
@@ -63,8 +58,6 @@
 }
 
 .header__user-avatar {
-  display: flex;
-  align-items: center;
   width: 40px;
   height: 40px;
   border-radius: 50%;

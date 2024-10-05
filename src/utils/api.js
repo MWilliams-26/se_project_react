@@ -63,7 +63,7 @@ export const updateCurrentUser = (name, avatar, token) => {
       name,
       avatar,
     }),
-  });
+  })
 };
 
 export const addLike = (id, token) => {
