@@ -20,7 +20,7 @@ const EditProfileModal = ({ isOpen, onClose, updateUserProfile, token }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateUserProfile(data);
+    updateUserProfile({ name, avatar, token });
   };
 
   return (
