@@ -8,13 +8,13 @@ import { useContext } from "react";
 
 
 function Header({ handleAddClick, weatherData, handleRegistrationClick, handleLoginClick, isLoggedIn }) {
-  
+
   const currentDate = new Date().toLocaleString('default',
-  {
-    month: 'long',
-    day: 'numeric'
-  });
-  
+    {
+      month: 'long',
+      day: 'numeric'
+    });
+
   const currentUser = useContext(CurrentUserContext);
   console.log(currentUser);
 
