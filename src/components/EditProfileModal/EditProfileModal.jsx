@@ -3,7 +3,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-const EditProfileModal = ({ isOpen, onClose, updateUserProfile, token }) => {
+const EditProfileModal = ({ isOpen, onClose, updateUserProfile }) => {
   const currentUser = useContext(CurrentUserContext);
   const [data, setData] = useState({
     name: "",
@@ -20,7 +20,7 @@ const EditProfileModal = ({ isOpen, onClose, updateUserProfile, token }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateUserProfile({ name, avatar, token });
+    updateUserProfile(data);
   };
 
   return (
