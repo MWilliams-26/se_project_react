@@ -10,7 +10,7 @@ import ProtectedRoute from '../../ProtectedRoute/ProtectedRoute';
 import { getWeather, filterWeatherData } from '../../utils/weatherApi';
 import { coordinates, APIkey } from '../../utils/constants';
 import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperatureUnitContext';
-import CurrentUserContext from '../../contexts/CurrentUserContext';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import AddItemModal from '../AddItemModal/AddItemModal';
 import Profile from '../Profile/Profile';
 import { getItems, addNewItem, deleteItem, updateCurrentUser, addLike, removeLike } from '../../utils/api';
@@ -42,7 +42,6 @@ function App() {
     email: "",
     _id: "",
   });
-  console.log(currentUser);
 
   const navigate = useNavigate();
 
@@ -142,14 +141,14 @@ function App() {
     navigate("/");
   }
 
-  const updateUserProfile = ({ name, avatar, token }) => {
-    updateCurrentUser({ name, avatar, token })
-      .then((data) => {
-        setCurrentUser(data);
-        closeActiveModal();
-      })
-      .catch((err) => console.log(err));
-  }
+const updateUserProfile = ({ name, avatar, token }) => {
+  updateCurrentUser(name, avatar, token)
+  .then((data) => {
+    setCurrentUser(data);
+    closeActiveModal();
+    })
+    .catch((err) => console.log(err));
+}
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
@@ -161,26 +160,26 @@ function App() {
   }, []);
   console.log(weatherData.temp);
 
-  useEffect(() => {
-    getItems()
-      .then(({ data }) => {
-        console.log(data);
-        setClothingItems(data);
-      })
-      .catch(console.error);
-  }, []);
+useEffect(() => {
+  getItems()
+    .then(({ data }) => {
+      console.log(data);
+      setClothingItems(data);
+    })
+    .catch(console.error);
+}, []);
 
-  useEffect(() => {
-    const token = localStorage.getItem("jwt");
-    if (token) {
-      checkToken(localStorage.getItem("jwt"))
-        .then((data) => {
-          setCurrentUser(data);
-          setIsLoggedIn(true);
-        })
-        .catch((err) => console.log(err));
-    }
-  }, [isLoggedIn]);
+useEffect(() => {
+  const token = localStorage.getItem("jwt");
+  if (token) {
+    checkToken(localStorage.getItem("jwt"))
+      .then((data) => {
+        setCurrentUser(data);
+        setIsLoggedIn(true);
+      })
+      .catch((err) => console.log(err));
+  }
+}, [isLoggedIn]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -224,38 +223,39 @@ function App() {
             <Footer />
           </div>
 
-          <AddItemModal
-            isOpen={activeModal === "add-garment"}
-            onClose={closeActiveModal}
-            onAddItem={handleAddItemSubmit}
-          />
-          <ItemModal
-            activeModal={activeModal}
-            card={selectedCard}
-            onClose={closeActiveModal}
-            onDelete={handleItemDelete}
-          />
-          <RegisterModal
-            isOpen={activeModal === "signup"}
-            onClose={closeActiveModal}
-            handleRegistration={handleRegistration}
-            handleTextButton={handleLoginClick}
-          />
-          <LoginModal
-            isOpen={activeModal === "login"}
-            onClose={closeActiveModal}
-            onLogin={handleLogin}
-            handleTextButton={handleRegistrationClick}
-          />
-          <EditProfileModal
-            isOpen={activeModal === "edit-profile"}
-            onClose={closeActiveModal}
-            updateUserProfile={updateUserProfile}
-          />
-        </CurrentTemperatureUnitContext.Provider>
-      </div>
-    </CurrentUserContext.Provider>
-  );
+        <AddItemModal
+          isOpen={activeModal === "add-garment"}
+          onClose={closeActiveModal}
+          onAddItem={handleAddItemSubmit}
+        />
+        <ItemModal
+          activeModal={activeModal}
+          card={selectedCard}
+          onClose={closeActiveModal}
+          onDelete={handleItemDelete}
+        />
+        <RegisterModal
+          isOpen={activeModal === "signup"}
+          onClose={closeActiveModal}
+          handleRegistration={handleRegistration}
+          handleTextButton={handleLoginClick}
+        />
+        <LoginModal
+          isOpen={activeModal === "login"}
+          onClose={closeActiveModal}
+          onLogin={handleLogin}
+          handleTextButton={handleRegistrationClick}
+        />
+        <EditProfileModal
+          isOpen={activeModal === "edit-profile"}
+          onClose={closeActiveModal}
+          updateUserProfile={updateUserProfile}
+          token={localStorage.getItem("jwt")}
+        />
+      </CurrentTemperatureUnitContext.Provider>
+    </div>
+  </CurrentUserContext.Provider>
+);
 }
 
 export default App;

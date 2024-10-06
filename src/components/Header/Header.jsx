@@ -2,20 +2,21 @@ import "./Header.css"
 import logo from "../../assets/logo.svg"
 import avatar from "../../assets/avatar.svg"
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
-import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 
 
 function Header({ handleAddClick, weatherData, handleRegistrationClick, handleLoginClick, isLoggedIn }) {
-
+  
   const currentDate = new Date().toLocaleString('default',
-    {
-      month: 'long',
-      day: 'numeric'
-    });
-
+  {
+    month: 'long',
+    day: 'numeric'
+  });
+  
   const currentUser = useContext(CurrentUserContext);
+  console.log(currentUser);
 
   return (
     <header className="header">
@@ -28,7 +29,7 @@ function Header({ handleAddClick, weatherData, handleRegistrationClick, handleLo
       </p>
       <ToggleSwitch />
 
-      {isLoggedIn && currentUser ? (
+      {isLoggedIn ? (
         <>
           <div className="header__user-container">
             <button
@@ -40,15 +41,15 @@ function Header({ handleAddClick, weatherData, handleRegistrationClick, handleLo
             </button>
             <Link to="/profile" className="header__link">
               <p className="header__username">{currentUser?.name}</p>
-              {currentUser?.avatar ? (
+              {currentUser.avatar ? (
                 <img
-                  src={currentUser.avatar}
-                  alt="avatar"
+                  src={currentUser?.avatar}
+                  alt={currentUser.name}
                   className="header__user-avatar"
                 />
               ) : (
                 <div className="header__avatar-placeholder">
-                  {currentUser?.name?.charAt(0).toUpperCase()}
+                  {currentUser?.name.charAt(0).toUpperCase()}
                 </div>
               )}
             </Link>
