@@ -23,7 +23,7 @@ const AddItemModal = ({ onClose, onAddItem, isOpen }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onAddItem({ name, imageUrl, weather });
+    addNewClothesItem(data);
   }
 
   useEffect(() => {
@@ -38,7 +38,6 @@ const AddItemModal = ({ onClose, onAddItem, isOpen }) => {
     <ModalWithForm
       isOpen={isOpen}
       title="New garment"
-      name="add-garment"
       buttonText="Add Garment"
       onClose={onClose}
       onSubmit={handleSubmit}
