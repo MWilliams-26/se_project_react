@@ -3,7 +3,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
-const EditProfileModal = ({ isOpen, onClose, updateUserProfile }) => {
+const EditProfileModal = ({ isOpen, onClose, updateUserProfile, token }) => {
   const currentUser = useContext(CurrentUserContext);
   const [data, setData] = useState({
     name: "",
