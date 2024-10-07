@@ -1,31 +1,25 @@
-import { request, baseUrl } from "./api";
+import { request, baseUrl, checkResponse } from "./api";
 
 export const register = ({ email, password, name, avatar }) => {
   return request(`${baseUrl}/signup`, {
     method: "POST",
     headers: {
+      Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      email,
-      password,
-      name,
-      avatar,
-    }),
-  })
+    body: JSON.stringify({ email, password, name, avatar, }),
+  });
 };
 
 export const login = ({ email, password }) => {
   return request(`${baseUrl}/signin`, {
     method: "POST",
     headers: {
+      Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({
-      email,
-      password,
-    }),
-  })
+    body: JSON.stringify({ email, password, }),
+  });
 };
 
 export const checkToken = (token) => {
@@ -36,5 +30,16 @@ export const checkToken = (token) => {
       Authorization: `Bearer ${token}`,
     },
   })
+};
+
+export const editProfile = ({ name, avatar }, token) => {
+  return request(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ name, avatar }),
+  });
 };
 
