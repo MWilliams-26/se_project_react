@@ -8,7 +8,7 @@ export const checkResponse = (res) => {
 };
 
 export const request = (url, options) => {
-    return fetch(url, options).then(checkResponse);
+  return fetch(url, options).then(checkResponse);
 };
 
 export const getItems = () => {
@@ -54,6 +54,17 @@ export const removeLike = (id, token) => {
   return fetch(`${baseUrl}/items/${id}/likes`, {
     method: "DELETE",
     headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  }).then(checkResponse);
+};
+
+export const getUserInfo = (token) => {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },

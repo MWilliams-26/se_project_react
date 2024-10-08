@@ -13,7 +13,7 @@ import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperature
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import AddItemModal from '../AddItemModal/AddItemModal';
 import Profile from '../Profile/Profile';
-import { getItems, addNewItem, deleteItem, addLike, removeLike } from '../../utils/api';
+import { getItems, addNewItem, deleteItem, addLike, removeLike, getUserInfo } from '../../utils/api';
 // import { register, login, checkToken } from '../../utils/auth';
 import RegisterModal from '../RegisterModal/RegisterModal';
 import LoginModal from '../LoginModal/LoginModal';
@@ -118,9 +118,9 @@ function App() {
 
   const handleRegistration = ({ email, password, name, avatar }) => {
     return auth
-      .register({email, password, name, avatar})
+      .register({ email, password, name, avatar })
       .then(() => {
-        handleLogin({email, password});
+        handleLogin({ email, password });
         closeActiveModal();
       })
       .catch(console.error);
@@ -185,11 +185,10 @@ function App() {
     if (!token) {
       return;
     }
-    auth
-      .checkToken(token)
+    getUserInfo(token)
       .then((data) => {
-        setCurrentUser(data);
         setIsLoggedIn(true);
+        setCurrentUser(data);
         navigate("/profile");
       })
       .catch(console.error);
