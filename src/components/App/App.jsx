@@ -134,15 +134,19 @@ function App() {
     }
 
     return auth
-      .login({ email, password })
+      .login(email, password)
       .then((data) => {
-        auth.checkToken(data.token).then((data) => {
-          setIsLoggedIn(true);
-          setCurrentUser(data);
-          localStorage.setItem("jwt", data.token);
-          navigate("/profile");
-          closeActiveModal();
-        });
+        console.log(data);
+        if (data.token) {
+          setToken(data.token);
+          auth.checkToken(data.token).then((data) => {
+            setIsLoggedIn(true);
+            setCurrentUser(data);
+            localStorage.setItem("jwt", data.token);
+            navigate("/profile");
+            closeActiveModal();
+          });
+        }
       })
       .catch(console.error);
   };
@@ -155,8 +159,7 @@ function App() {
 
   const updateUserProfile = (data) => {
     const token = localStorage.getItem("jwt");
-
-    auth
+    return auth
       .editProfile(data, token)
       .then((res) => {
         setCurrentUser(res);
