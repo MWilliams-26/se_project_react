@@ -2,12 +2,14 @@ import "./Header.css"
 import logo from "../../assets/logo.svg"
 import avatar from "../../assets/avatar.svg"
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
+import {CurrentUserContext} from "../../contexts/CurrentUserContext";
 
 
 function Header({ handleAddClick, weatherData, handleRegistrationClick, handleLoginClick, isLoggedIn }) {
+  const currentUser = useContext(CurrentUserContext);
+  console.log(currentUser);
   
   const currentDate = new Date().toLocaleString('default',
   {
@@ -15,8 +17,6 @@ function Header({ handleAddClick, weatherData, handleRegistrationClick, handleLo
     day: 'numeric'
   });
   
-  const currentUser = useContext(CurrentUserContext);
-  console.log(currentUser);
 
   return (
     <header className="header">

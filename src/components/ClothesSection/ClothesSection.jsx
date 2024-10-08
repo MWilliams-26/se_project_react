@@ -20,7 +20,7 @@ function ClothesSection({ onCardClick, handleAddClick, clothingItems }) {
       </div>
       <ul className="clothes-section__items">
         {clothingItems
-          .map((item) => {
+          ?.map((item) => {
             if (item.owner === currentUser._id) {
               return (
                 <ItemCard

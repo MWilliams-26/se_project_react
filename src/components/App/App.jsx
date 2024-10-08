@@ -118,11 +118,9 @@ function App() {
 
   const handleRegistration = ({ email, password, name, avatar }) => {
     return auth
-      .register({ email, password, name, avatar })
+      .register({email, password, name, avatar})
       .then(() => {
-        handleLogin({ email, password });
-      })
-      .then(() => {
+        handleLogin({email, password});
         closeActiveModal();
       })
       .catch(console.error);
@@ -133,20 +131,15 @@ function App() {
       return;
     }
 
-    return auth
-      .login(email, password)
+    auth
+      .login({ email, password })
       .then((data) => {
         console.log(data);
-        if (data.token) {
-          setToken(data.token);
-          auth.checkToken(data.token).then((data) => {
-            setIsLoggedIn(true);
-            setCurrentUser(data);
-            localStorage.setItem("jwt", data.token);
-            navigate("/profile");
-            closeActiveModal();
-          });
-        }
+        localStorage.setItem("jwt", data.token);
+        setIsLoggedIn(true);
+        setCurrentUser(data);
+        navigate("/profile");
+        closeActiveModal();
       })
       .catch(console.error);
   };
@@ -195,8 +188,9 @@ function App() {
     auth
       .checkToken(token)
       .then((data) => {
-        setIsLoggedIn(true);
         setCurrentUser(data);
+        setIsLoggedIn(true);
+        navigate("/profile");
       })
       .catch(console.error);
   }, []);

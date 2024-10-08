@@ -6,10 +6,6 @@ const LoginModal = ({ isOpen, onClose, onLogin, handleTextButton }) => {
     email: "",
     password: "",
   });
-  
-  const isFormValid = () => {
-    return data.email && data.password;
-  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,6 +17,9 @@ const LoginModal = ({ isOpen, onClose, onLogin, handleTextButton }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!data.email || !data.password) {
+      return;
+    }
     onLogin(data);
   };
 

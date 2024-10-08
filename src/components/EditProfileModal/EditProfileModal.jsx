@@ -25,8 +25,8 @@ const EditProfileModal = ({ isOpen, onClose, updateUserProfile }) => {
   useEffect(() => {
     if (currentUser) {
       setData({
-        name: currentUser?.name,
-        avatar: currentUser?.avatar,
+        name: currentUser?.name || "",
+        avatar: currentUser?.avatar || "",
       })
     }
   }, [currentUser]);
