@@ -7,7 +7,7 @@ export const checkResponse = (res) => {
   return Promise.reject(`Error: ${res.status}`);
 };
 
-export const fetch = (url, options) => {
+export const request = (url, options) => {
     return fetch(url, options).then(checkResponse);
 };
 
@@ -19,7 +19,7 @@ export const addNewItem = (name, imageUrl, weather, token) => {
   return fetch(`${baseUrl}/items`, {
     method: "POST",
     headers: {
-      "Content-Type": "applications/json",
+      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
     body: JSON.stringify({
@@ -34,7 +34,7 @@ export const deleteItem = (id, token) => {
   return fetch(`${baseUrl}/items/${id}`, {
     method: "DELETE",
     headers: {
-      "Content-Type": "applications/json",
+      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     }
   }).then(checkResponse);
@@ -44,7 +44,7 @@ export const addLike = (id, token) => {
   return fetch(`${baseUrl}/items/${id}/likes`, {
     method: "PUT",
     headers: {
-      "Content-Type": "applications/json",
+      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   }).then(checkResponse);
@@ -54,7 +54,7 @@ export const removeLike = (id, token) => {
   return fetch(`${baseUrl}/items/${id}/likes`, {
     method: "DELETE",
     headers: {
-      "Content-Type": "applications/json",
+      "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
   }).then(checkResponse);

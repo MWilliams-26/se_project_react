@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 
@@ -9,6 +9,10 @@ const RegisterModal = ({ isOpen, handleRegistration, handleTextButton, onClose }
         name: "",
         avatar: "",
     });
+
+    const isFormValid = () => {
+        return data.email && data.password && data.name && data.avatar;
+    };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -21,8 +25,20 @@ const RegisterModal = ({ isOpen, handleRegistration, handleTextButton, onClose }
 
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (!isFormValid()) {
+            return;
+        }
         handleRegistration(data);
     };
+    
+    useEffect(() => {
+        setData({
+            email: "",
+            password: "",
+            name: "",
+            avatar: "",
+        });
+    }, [isOpen]);
 
     return (
         <ModalWithForm

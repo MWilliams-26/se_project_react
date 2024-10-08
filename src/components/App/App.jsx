@@ -6,18 +6,19 @@ import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import ItemModal from '../ItemModal/ItemModal';
-import ProtectedRoute from '../../ProtectedRoute/ProtectedRoute';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { getWeather, filterWeatherData } from '../../utils/weatherApi';
 import { coordinates, APIkey } from '../../utils/constants';
 import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperatureUnitContext';
-import CurrentUserContext from '../../contexts/CurrentUserContext';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import AddItemModal from '../AddItemModal/AddItemModal';
 import Profile from '../Profile/Profile';
-import { getItems, addNewItem, deleteItem, updateCurrentUser, addLike, removeLike } from '../../utils/api';
-import { register, login, checkToken } from '../../utils/auth';
+import { getItems, addNewItem, deleteItem, addLike, removeLike } from '../../utils/api';
+// import { register, login, checkToken } from '../../utils/auth';
 import RegisterModal from '../RegisterModal/RegisterModal';
 import LoginModal from '../LoginModal/LoginModal';
 import EditProfileModal from '../EditProfileModal/EditProfileModal';
+import * as auth from '../../utils/auth';
 
 // const api = new Api({
 //   baseUrl: "http://localhost:3001",
@@ -106,7 +107,8 @@ function App() {
   }
 
   const handleAddItemSubmit = (values) => {
-    addNewItem(values)
+    const token = localStorage.getItem("jwt");
+    addNewItem(values.name, values.imageUrl, values.weather, token)
       .then((newItem) => {
         setClothingItems([newItem, ...clothingItems]);
         closeActiveModal();
@@ -115,26 +117,35 @@ function App() {
   };
 
   const handleRegistration = ({ email, password, name, avatar }) => {
-    register({ email, password, name, avatar })
-      .then((res) => {
-        console.log(res);
-        handleLogin(email, password);
+    return auth
+      .register({ email, password, name, avatar })
+      .then(() => {
+        handleLogin({ email, password });
       })
-      .catch((err) => console.log("Registration failed:", err));
-  }
-
-  const handleLogin = ({ email, password }) => {
-    login({ email, password })
-      .then((data) => {
-        console.log(data);
-        localStorage.setItem("jwt", data.token);
-        setIsLoggedIn(true);
-        setCurrentUser(data)
-        navigate("/profile");
+      .then(() => {
         closeActiveModal();
       })
-      .catch((err) => console.log("Login failed:", err));
-  }
+      .catch(console.error);
+  };
+
+  const handleLogin = ({ email, password }) => {
+    if (!email || !password) {
+      return;
+    }
+
+    return auth
+      .login({ email, password })
+      .then((data) => {
+        auth.checkToken(data.token).then((data) => {
+          setIsLoggedIn(true);
+          setCurrentUser(data);
+          localStorage.setItem("jwt", data.token);
+          navigate("/profile");
+          closeActiveModal();
+        });
+      })
+      .catch(console.error);
+  };
 
   const handleLogout = () => {
     localStorage.removeItem("jwt");
@@ -142,14 +153,17 @@ function App() {
     navigate("/");
   }
 
-  const updateUserProfile = ({ name, avatar, token }) => {
-    updateCurrentUser({ name, avatar, token })
-      .then((data) => {
-        setCurrentUser(data);
+  const updateUserProfile = (data) => {
+    const token = localStorage.getItem("jwt");
+
+    auth
+      .editProfile(data, token)
+      .then((res) => {
+        setCurrentUser(res);
         closeActiveModal();
       })
-      .catch((err) => console.log(err));
-  }
+      .catch(console.error);
+  };
 
   useEffect(() => {
     getWeather(coordinates, APIkey)
@@ -172,15 +186,17 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("jwt");
-    if (token) {
-      checkToken(localStorage.getItem("jwt"))
-        .then((data) => {
-          setCurrentUser(data);
-          setIsLoggedIn(true);
-        })
-        .catch((err) => console.log(err));
+    if (!token) {
+      return;
     }
-  }, [isLoggedIn]);
+    auth
+      .checkToken(token)
+      .then((data) => {
+        setIsLoggedIn(true);
+        setCurrentUser(data);
+      })
+      .catch(console.error);
+  }, []);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -227,7 +243,7 @@ function App() {
           <AddItemModal
             isOpen={activeModal === "add-garment"}
             onClose={closeActiveModal}
-            onAddItem={handleAddItemSubmit}
+            addNewClothesItem={handleAddItemSubmit}
           />
           <ItemModal
             activeModal={activeModal}

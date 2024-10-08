@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
 const LoginModal = ({ isOpen, onClose, onLogin, handleTextButton }) => {
@@ -6,6 +6,10 @@ const LoginModal = ({ isOpen, onClose, onLogin, handleTextButton }) => {
     email: "",
     password: "",
   });
+  
+  const isFormValid = () => {
+    return data.email && data.password;
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -19,6 +23,13 @@ const LoginModal = ({ isOpen, onClose, onLogin, handleTextButton }) => {
     e.preventDefault();
     onLogin(data);
   };
+
+  useEffect(() => {
+    setData({
+      email: "",
+      password: "",
+    });
+  }, [isOpen]);
 
   return (
     <ModalWithForm
