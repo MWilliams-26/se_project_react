@@ -37,6 +37,7 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState('F');
   const [clothingItems, setClothingItems] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
   const [currentUser, setCurrentUser] = useState({
     name: "",
     avatar: "",
@@ -90,27 +91,30 @@ function App() {
 
   const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");
-    !isLiked
-      ? addLike(id, token)
+    if (!isLiked) {
+       addLike(id, token)
         .then((updatedCard) => {
-          setClothingItems((cards) => cards.map((card) =>
-            card._id === updatedCard._id ? updatedCard : card))
+          setClothingItems((cards) =>
+            cards.map((item) => (item._id === id ? updatedCard : item))
+          );
         })
-        .catch((err) => console.log(err))
-      :
+        .catch((err) => console.log(err));
+    } else {
       removeLike(id, token)
         .then((updatedCard) => {
-          setClothingItems((cards) => cards.map((card) =>
-            card._id === updatedCard._id ? updatedCard : card))
+          setClothingItems((cards) =>
+            cards.map((item) => (item._id === id ? updatedCard : item))
+          );
         })
         .catch((err) => console.log(err));
   }
+};
 
   const handleAddItemSubmit = (values) => {
     const token = localStorage.getItem("jwt");
     addNewItem(values.name, values.imageUrl, values.weather, token)
       .then((newItem) => {
-        setClothingItems([newItem, ...clothingItems]);
+        setClothingItems([newItem.data, ...clothingItems]);
         closeActiveModal();
       })
       .catch((err) => console.log(err));
@@ -173,7 +177,7 @@ function App() {
 
   useEffect(() => {
     getItems()
-      .then(({ data }) => {
+      .then((data) => {
         console.log(data);
         setClothingItems(data);
       })
