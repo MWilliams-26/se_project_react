@@ -177,12 +177,12 @@ function App() {
 
   useEffect(() => {
     getItems()
-      .then((data) => {
-        console.log(data);
-        setClothingItems(data);
+      .then((items) => {
+        console.log(items);
+        setClothingItems(items);
       })
       .catch(console.error);
-  }, []);
+  }, [isLoggedIn]);
 
   useEffect(() => {
     const token = localStorage.getItem("jwt");
