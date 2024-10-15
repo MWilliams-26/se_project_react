@@ -92,10 +92,10 @@ function App() {
   const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");
     if (!isLiked) {
-       addLike(id, token)
+      addLike(id, token)
         .then((updatedCard) => {
           setClothingItems((cards) =>
-            cards.map((item) => (item._id === id ? updatedCard : item))
+            cards.map((item) => (item._id === id ? updatedCard.data : item))
           );
         })
         .catch((err) => console.log(err));
@@ -107,8 +107,8 @@ function App() {
           );
         })
         .catch((err) => console.log(err));
-  }
-};
+    }
+  };
 
   const handleAddItemSubmit = (values) => {
     const token = localStorage.getItem("jwt");
@@ -232,6 +232,7 @@ function App() {
                       handleAddClick={handleAddClick}
                       handleProfileEditClick={handleProfileEditClick}
                       handleLogout={handleLogout}
+                      onCardLike={handleCardLike}
                     />
                   </ProtectedRoute>
                 }
