@@ -20,7 +20,7 @@
 }
 
 .card__name {
-  background-color: #fff;
+  background-color: transparent;
   top: 15px;
   margin: 0;
   padding: 2px 12px;

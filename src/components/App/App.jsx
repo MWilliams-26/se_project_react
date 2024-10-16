@@ -19,6 +19,7 @@ import RegisterModal from '../RegisterModal/RegisterModal';
 import LoginModal from '../LoginModal/LoginModal';
 import EditProfileModal from '../EditProfileModal/EditProfileModal';
 import * as auth from '../../utils/auth';
+import * as api from '../../utils/api';
 
 // const api = new Api({
 //   baseUrl: "http://localhost:3001",
@@ -37,7 +38,6 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState('F');
   const [clothingItems, setClothingItems] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
   const [currentUser, setCurrentUser] = useState({
     name: "",
     avatar: "",
@@ -89,30 +89,35 @@ function App() {
       });
   };
 
-  const handleCardLike = ({ id, isLiked }) => {
+  const handleCardLike = ({ _id, isLiked }) => {
     const token = localStorage.getItem("jwt");
-    if (!isLiked) {
-      addLike(id, token)
+    
+    !isLiked
+      ? api
+        .addLike(_id, token)
         .then((updatedCard) => {
+          console.log(updatedCard);
           setClothingItems((cards) =>
-            cards.map((item) => (item._id === id ? updatedCard.data : item))
+          cards.map((item) => (item._id === _id ? updatedCard.data : item)),
+          );
+        })
+        .catch((err) => console.log(err))
+        :
+        api
+        .removeLike(_id, token)
+        .then((updatedCard) => {
+          console.log(updatedCard);
+          setClothingItems((cards) =>
+          cards.map((item) => (item._id === _id ? updatedCard.data : item)),
           );
         })
         .catch((err) => console.log(err));
-    } else {
-      removeLike(id, token)
-        .then((updatedCard) => {
-          setClothingItems((cards) =>
-            cards.map((item) => (item._id === id ? updatedCard : item))
-          );
-        })
-        .catch((err) => console.log(err));
-    }
-  };
+  }
 
   const handleAddItemSubmit = (values) => {
     const token = localStorage.getItem("jwt");
-    addNewItem(values.name, values.imageUrl, values.weather, token)
+    api
+      .addNewItem(values.name, values.imageUrl, values.weather, token)
       .then((newItem) => {
         setClothingItems([newItem.data, ...clothingItems]);
         closeActiveModal();
@@ -135,23 +140,25 @@ function App() {
       return;
     }
 
-    auth
+    return auth
       .login({ email, password })
       .then((data) => {
         console.log(data);
         localStorage.setItem("jwt", data.token);
-        setIsLoggedIn(true);
-        setCurrentUser(data);
-        navigate("/profile");
-        closeActiveModal();
+        api.getUserInfo(data.token).then((userData) => {
+          setCurrentUser(userData);
+          setIsLoggedIn(true);
+          closeActiveModal();
+          navigate("/profile");
+        });
       })
       .catch(console.error);
-  };
+  }
 
   const handleLogout = () => {
     localStorage.removeItem("jwt");
-    setIsLoggedIn(false);
     navigate("/");
+    setIsLoggedIn(false);
   }
 
   const updateUserProfile = (data) => {
@@ -189,7 +196,9 @@ function App() {
     if (!token) {
       return;
     }
-    getUserInfo(token)
+
+    api
+      .getUserInfo(token)
       .then((data) => {
         setIsLoggedIn(true);
         setCurrentUser(data);
