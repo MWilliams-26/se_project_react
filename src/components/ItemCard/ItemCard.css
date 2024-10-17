@@ -44,7 +44,7 @@
 .card__like-button {
   width: 18px;
   height: 15px;
-  background-image: "../../assets/like-button.svg";
+  background-image: url("../../assets/like-button.svg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -53,5 +53,5 @@
   cursor: pointer;
 }
 .card__like-button_active {
-  background-image: "../../assets/like-button-active.svg";
+  background-image: url("../../assets/like-button-active.svg");
 }

@@ -21,6 +21,7 @@ import LoginModal from '../LoginModal/LoginModal';
 import EditProfileModal from '../EditProfileModal/EditProfileModal';
 import * as auth from '../../utils/auth';
 import * as api from '../../utils/api';
+import { act } from 'react';
 
 // const api = new Api({
 //   baseUrl: "http://localhost:3001",
@@ -81,34 +82,37 @@ function App() {
   const handleItemDelete = (card) => {
     const token = localStorage.getItem("jwt");
     api
-    .deleteItem(card._id)
-    .then((res) => {
-        console.log(res);
-        setClothingItems((cards) => cards.filter((card) => card._id !== card._id));
+      .deleteItem(card._id, token)
+      .then(() => {
+        const updatedCards = clothingItems.filter((item) => {
+          return item._id !== card._id;
+        });
+        setClothingItems(updatedCards);
+        closeActiveModal();
       })
       .catch((err) => console.log(err));
   };
 
   const handleCardLike = ({ _id, isLiked }) => {
     const token = localStorage.getItem("jwt");
-    
+
     !isLiked
       ? api
         .addLike(_id, token)
         .then((updatedCard) => {
           console.log(updatedCard);
           setClothingItems((cards) =>
-          cards.map((item) => (item._id === _id ? updatedCard.data : item)),
+            cards.map((item) => (item._id === _id ? updatedCard.data : item)),
           );
         })
         .catch((err) => console.log(err))
-        :
-        api
+      :
+      api
         .removeLike(_id, token)
         .then((updatedCard) => {
           console.log(updatedCard);
           setClothingItems((cards) =>
-          cards.map((item) => (item._id === _id ? updatedCard.data : item)),
+            cards.map((item) => (item._id === _id ? updatedCard.data : item)),
           );
         })
         .catch((err) => console.log(err));
@@ -183,10 +187,11 @@ function App() {
   console.log(weatherData.temp);
 
   useEffect(() => {
-    getItems()
-      .then((items) => {
-        console.log(items);
-        setClothingItems(items);
+    api
+      .getItems()
+      .then((data) => {
+        console.log(data);
+        setClothingItems(data);
       })
       .catch(console.error);
   }, [isLoggedIn]);
@@ -203,6 +208,31 @@ function App() {
         setIsLoggedIn(true);
         setCurrentUser(data);
         navigate("/profile");
+      })
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    if (!activeModal) return;
+
+    const handleEscClose = (e) => {
+      if (e.key === "Escape") {
+        closeActiveModal();
+      }
+    };
+
+    document.addEventListener("keydown", handleEscClose);
+
+    return () => {
+      document.removeEventListener("keydown", handleEscClose);
+    };
+  }, [activeModal]);
+
+  useEffect(() => {
+    getWeather(coordinates, APIkey)
+      .then((data) => {
+        const filteredData = filterWeatherData(data);
+        setWeatherData(filteredData);
       })
       .catch(console.error);
   }, []);
