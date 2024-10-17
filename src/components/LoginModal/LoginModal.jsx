@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import "./LoginModal.css";
 
 const LoginModal = ({ isOpen, onClose, onLogin, handleTextButton }) => {
   const [data, setData] = useState({
