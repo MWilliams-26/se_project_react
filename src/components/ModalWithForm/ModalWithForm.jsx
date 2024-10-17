@@ -1,4 +1,4 @@
-import "./ModalWithForm.css"
+import "./ModalWithForm.css";
 import close from "../../assets/close.svg";
 
 const ModalWithForm = ({ title, buttonText, redirectText, handleTextButton, children, onClose, isOpen, onSubmit }) => {

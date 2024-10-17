@@ -6,6 +6,7 @@ import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import ItemModal from '../ItemModal/ItemModal';
+import DeleteConfirmationModal from '../DeleteConfirmationModal/DeleteConfirmationModal';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { getWeather, filterWeatherData } from '../../utils/weatherApi';
 import { coordinates, APIkey } from '../../utils/constants';
@@ -78,15 +79,14 @@ function App() {
   };
 
   const handleItemDelete = (card) => {
-    console.log(card._id);
-    deleteItem(card._id)
-      .then(() => {
-        setClothingItems((cards) => cards.filter((x) => x._id !== card._id));
-        closeActiveModal();
+    const token = localStorage.getItem("jwt");
+    api
+    .deleteItem(card._id)
+    .then((res) => {
+        console.log(res);
+        setClothingItems((cards) => cards.filter((card) => card._id !== card._id));
       })
-      .catch((res) => {
-        console.log(`Error: ${res}`);
-      });
+      .catch((err) => console.log(err));
   };
 
   const handleCardLike = ({ _id, isLiked }) => {
