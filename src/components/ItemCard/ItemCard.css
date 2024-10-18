@@ -53,5 +53,5 @@
   cursor: pointer;
 }
 .card__like-button_active {
-  background-image: url("../../assets/like-button-active.svg");
+  background-image: url("../../assets/like-button_active.svg");
 }
