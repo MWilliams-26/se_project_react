@@ -80,7 +80,7 @@ const RegisterModal = ({ isOpen, handleRegistration, handleTextButton, onClose }
 
                 />
             </label>
-            <label htmlFor="name" className="modal__label">
+            <label className="modal__label">
                 Name{""}
                 <input
                     type="text"

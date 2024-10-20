@@ -6,7 +6,6 @@ import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import ItemModal from '../ItemModal/ItemModal';
-import DeleteConfirmationModal from '../DeleteConfirmationModal/DeleteConfirmationModal';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 import { getWeather, filterWeatherData } from '../../utils/weatherApi';
 import { coordinates, APIkey } from '../../utils/constants';
@@ -14,19 +13,11 @@ import { CurrentTemperatureUnitContext } from '../../contexts/CurrentTemperature
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import AddItemModal from '../AddItemModal/AddItemModal';
 import Profile from '../Profile/Profile';
-import { getItems, addNewItem, deleteItem, addLike, removeLike, getUserInfo } from '../../utils/api';
-// import { register, login, checkToken } from '../../utils/auth';
 import RegisterModal from '../RegisterModal/RegisterModal';
 import LoginModal from '../LoginModal/LoginModal';
 import EditProfileModal from '../EditProfileModal/EditProfileModal';
 import * as auth from '../../utils/auth';
 import * as api from '../../utils/api';
-import { act } from 'react';
-
-// const api = new Api({
-//   baseUrl: "http://localhost:3001",
-//   headers: { "Content-Type": "application/json" },
-// });
 
 
 function App() {
@@ -211,22 +202,6 @@ function App() {
       })
       .catch(console.error);
   }, []);
-
-  useEffect(() => {
-    if (!activeModal) return;
-
-    const handleEscClose = (e) => {
-      if (e.key === "Escape") {
-        closeActiveModal();
-      }
-    };
-
-    document.addEventListener("keydown", handleEscClose);
-
-    return () => {
-      document.removeEventListener("keydown", handleEscClose);
-    };
-  }, [activeModal]);
 
   useEffect(() => {
     getWeather(coordinates, APIkey)

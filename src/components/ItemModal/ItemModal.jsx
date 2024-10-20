@@ -12,12 +12,10 @@ function ItemModal({ activeModal, onClose, card, onDelete }) {
 
   const isOwn = card.owner === currentUser?._id;
 
-  const itemDeleteButtonClassName = (
-    `item__delete-button ${isOwn ? 'item__delete-button_visible' : 'item__delete-button_hidden'}`
-  );
+  const itemDeleteButtonClassName = `item__delete-button ${isOwn ? 'item__delete-button_visible' : 'item__delete-button_hidden'}`;
 
   return (
-    <div className={`modal ${activeModal === "preview" && "modal_opened"}`}>
+    <div className={`modal ${activeModal === "preview" && "modal_opened"}`} onClick={onClose}>
       <div className="modal__preview">
         <button onClick={onClose} type="button" className="modal__close">
           <img src={close} alt="close" className="modal__close-btn" />

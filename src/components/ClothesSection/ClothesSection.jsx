@@ -6,9 +6,7 @@ import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
 function ClothesSection({ onCardClick, handleAddClick, clothingItems, onCardLike }) {
   const currentUser = useContext(CurrentUserContext);
-  console.log(clothingItems)
   const userItems = clothingItems.filter((item) => item.owner === currentUser._id);
-  console.log(userItems);
 
   return (
     <div className="clothes-section">
