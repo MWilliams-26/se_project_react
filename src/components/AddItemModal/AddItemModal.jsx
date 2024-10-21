@@ -2,7 +2,7 @@ import ModalWithForm from "../ModalWithForm/ModalWithForm";
 import { useForm } from "../../hooks/useForm";
 
 const AddItemModal = ({ onClose, addNewClothesItem, isOpen }) => {
-  const { values, handleChange, setValues, resetForm } = useForm({
+  const { values, handleChange, setValues, resetForm  } = useForm({
     name: "",
     imageUrl: "",
     weather: "",
@@ -19,8 +19,9 @@ const AddItemModal = ({ onClose, addNewClothesItem, isOpen }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addNewClothesItem(values, resetActiveForm);
-  }
+    addNewClothesItem(values);
+    resetActiveForm();
+  };
 
 
   return (
@@ -31,7 +32,7 @@ const AddItemModal = ({ onClose, addNewClothesItem, isOpen }) => {
       onClose={onClose}
       onSubmit={handleSubmit}
     >
-      <label htmlFor="name" className="modal__label">
+      <label className="modal__label">
         Name{""}
         <input
           type="text"
@@ -44,7 +45,7 @@ const AddItemModal = ({ onClose, addNewClothesItem, isOpen }) => {
           required
         />
       </label>
-      <label htmlFor="imageUrl" className="modal__label">
+      <label className="modal__label">
         Image{""}
         <input
           type="url"

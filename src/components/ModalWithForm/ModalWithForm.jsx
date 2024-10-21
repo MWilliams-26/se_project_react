@@ -5,7 +5,7 @@ import close from "../../assets/close.svg";
 const ModalWithForm = ({ title, buttonText, redirectText, handleTextButton, children, onClose, isOpen, onSubmit }) => {
 
   useEffect(() => {
-    if (!open) return;
+    if (!isOpen) return;
     const handleEscape = (e) => {
       if (e.key === "Escape") {
         onClose();

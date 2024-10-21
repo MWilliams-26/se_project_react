@@ -1,4 +1,5 @@
 import "./ItemModal.css"
+import { useEffect } from "react";
 // import close from "../../assets/close.svg";
 import { useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
@@ -9,6 +10,19 @@ function ItemModal({ isOpen, onClose, card, onDelete }) {
   const handleItemDelete = () => {
     onDelete(card);
   };
+
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleEscape = (e) => {
+      if (e.key === "Escape") {
+        onClose();
+      }
+    };
+    document.addEventListener("keydown", handleEscape);
+    return () => {
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [isOpen, onClose]);
 
   const handleOverlayClose = (e) => {
     if (e.target === e.currentTarget) {

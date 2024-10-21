@@ -52,7 +52,7 @@ const RegisterModal = ({ isOpen, handleRegistration, handleTextButton, onClose }
             onClose={onClose}
             onSubmit={handleSubmit}
         >
-            <label htmlFor="email" className="modal__label">
+            <label className="modal__label">
                 Email{""}
                 <input
                     type="email"
@@ -66,7 +66,7 @@ const RegisterModal = ({ isOpen, handleRegistration, handleTextButton, onClose }
 
                 />
             </label>
-            <label htmlFor="password" className="modal__label">
+            <label className="modal__label">
                 Password{""}
                 <input
                     type="password"
@@ -94,7 +94,7 @@ const RegisterModal = ({ isOpen, handleRegistration, handleTextButton, onClose }
 
                 />
             </label>
-            <label htmlFor="avatar" className="modal__label">
+            <label className="modal__label">
                 Avatar{""}
                 <input
                     type="url"
