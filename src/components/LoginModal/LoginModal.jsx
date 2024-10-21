@@ -47,7 +47,7 @@ const LoginModal = ({ isOpen, onClose, onLogin, handleTextButton }) => {
         <input
           type="email"
           className="modal__input"
-          id="email"
+          id="user-email"
           name="email"
           placeholder="Email"
           value={data.email}
@@ -61,7 +61,7 @@ const LoginModal = ({ isOpen, onClose, onLogin, handleTextButton }) => {
         <input
           type="password"
           className="modal__input"
-          id="password"
+          id="user-password"
           name="password"
           placeholder="Password"
           value={data.password}

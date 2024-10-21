@@ -263,7 +263,7 @@ function App() {
           <ItemModal
             activeModal={activeModal}
             card={selectedCard}
-            onClose={closeActiveModal}
+            onclose={closeActiveModal}
             onDelete={handleItemDelete}
           />
           <RegisterModal

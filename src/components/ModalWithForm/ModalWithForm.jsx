@@ -6,22 +6,23 @@ const ModalWithForm = ({ title, buttonText, redirectText, handleTextButton, chil
 
   useEffect(() => {
     if (!open) return;
-    const handleEscClose = (e) => {
+    const handleEscape = (e) => {
       if (e.key === "Escape") {
         onClose();
       }
     };
-    document.addEventListener("keydown", handleEscClose);
+    document.addEventListener("keydown", handleEscape);
     return () => {
-      document.removeEventListener("keydown", handleEscClose);
+      document.removeEventListener("keydown", handleEscape);
     };
-  }, [onClose, isOpen]);
+  }, [isOpen, onClose]);
 
   const handleOverlayClose = (e) => {
     if (e.target === e.currentTarget) {
       onClose();
     }
-  }
+  };
+
 
   return (
     <div className={`modal ${isOpen && "modal_opened"}`} onClick={handleOverlayClose}>
@@ -49,7 +50,7 @@ const ModalWithForm = ({ title, buttonText, redirectText, handleTextButton, chil
       </div>
     </div>
   )
-}
+};
 
 
 export default ModalWithForm;

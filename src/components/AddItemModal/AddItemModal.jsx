@@ -36,7 +36,7 @@ const AddItemModal = ({ onClose, addNewClothesItem, isOpen }) => {
         <input
           type="text"
           className="modal__input"
-          id="name"
+          id="clothing-name"
           name="name"
           placeholder="Name"
           value={values.name}
