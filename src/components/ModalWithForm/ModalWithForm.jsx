@@ -5,6 +5,7 @@ import close from "../../assets/close.svg";
 const ModalWithForm = ({ title, buttonText, redirectText, handleTextButton, children, onClose, isOpen, onSubmit }) => {
 
   useEffect(() => {
+    if (!open) return;
     const handleEscClose = (e) => {
       if (e.key === "Escape") {
         onClose();
@@ -14,13 +15,13 @@ const ModalWithForm = ({ title, buttonText, redirectText, handleTextButton, chil
     return () => {
       document.removeEventListener("keydown", handleEscClose);
     };
-  }, [onClose]);
+  }, [onClose, isOpen]);
 
   const handleOverlayClose = (e) => {
     if (e.target === e.currentTarget) {
       onClose();
     }
-  };
+  }
 
   return (
     <div className={`modal ${isOpen && "modal_opened"}`} onClick={handleOverlayClose}>
