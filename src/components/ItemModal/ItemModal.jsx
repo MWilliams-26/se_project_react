@@ -1,13 +1,19 @@
 import "./ItemModal.css"
-import close from "../../assets/close.svg";
+// import close from "../../assets/close.svg";
 import { useContext } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 
-function ItemModal({ activeModal, onClose, card, onDelete }) {
+function ItemModal({ isOpen, onClose, card, onDelete }) {
   const currentUser = useContext(CurrentUserContext);
 
   const handleItemDelete = () => {
     onDelete(card);
+  };
+
+  const handleOverlayClose = (e) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
   };
 
   const isOwn = card.owner === currentUser?._id;
@@ -15,10 +21,9 @@ function ItemModal({ activeModal, onClose, card, onDelete }) {
   const itemDeleteButtonClassName = `item__delete-button ${isOwn ? 'item__delete-button_visible' : 'item__delete-button_hidden'}`;
 
   return (
-    <div className={`modal ${activeModal === "preview" && "modal_opened"}`} onClick={onClose}>
+    <div className={`modal ${isOpen && "modal_opened"}`} onClick={handleOverlayClose}>
       <div className="modal__preview">
-        <button onClick={onClose} type="button" className="modal__close">
-          <img src={close} alt="close" className="modal__close-btn" />
+        <button onClick={onClose} type="button" className="modal__close_button">
         </button>
         <img src={card.imageUrl} alt={card.name} className="modal__image" />
         <div className="modal__footer">

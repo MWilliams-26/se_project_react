@@ -261,9 +261,9 @@ function App() {
             addNewClothesItem={handleAddItemSubmit}
           />
           <ItemModal
-            activeModal={activeModal}
+            isOpen={activeModal === "preview"}
             card={selectedCard}
-            onclose={closeActiveModal}
+            onClose={closeActiveModal}
             onDelete={handleItemDelete}
           />
           <RegisterModal

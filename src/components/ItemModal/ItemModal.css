@@ -9,6 +9,18 @@
   overflow: hidden;
 }
 
+.modal__close_button {
+  position: absolute;
+  background: url("../../assets/close.svg") center no-repeat;
+  top: 20px;
+  right: 28px;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
 .modal__footer {
   display: flex;
   flex-direction: column;
